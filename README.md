@@ -40,8 +40,12 @@ This repository is for distribution only — downloads live under
 - **Right click** for:
   - **Sync Now** — triggers a Messages iCloud sync. There is no API for this,
     so it drives the button in System Settings.
-  - **Empty Recently Deleted (N)…** — permanently deletes everything in the
-    queue, after asking and naming the exact count.
+  - **Empty Recently Deleted (N)** — permanently deletes everything in the
+    queue. It runs straight away: what it clears is already in Recently
+    Deleted, which macOS purges by itself after about thirty days, so it empties
+    a trash rather than deleting anything live. The count in the menu item is
+    the last look before it runs, and the item disables itself when the queue is
+    empty.
   - Open Messages, and Quit.
 
 ## Install
@@ -63,9 +67,9 @@ This repository is for distribution only — downloads live under
    Access, then add or enable `Recently Deleted`. The Messages database is
    protected by macOS, so until you do this the menu bar shows `—`.
 4. Only if you want Sync Now or Empty Recently Deleted, also grant
-   **Accessibility** in the same settings pane. Both work by clicking through
-   real UI, which macOS gates behind that permission. The counts do not need
-   it.
+   **Accessibility** in the same settings pane. Neither task has an API, so both
+   work by clicking through real UI, which macOS gates behind that permission.
+   The counts in the menu bar and panel do not need it.
 
 ### After an update
 
@@ -103,7 +107,8 @@ making no connections at all.
 
 Emptying Recently Deleted is deliberately done through the Messages UI rather
 than by writing to the database. A direct delete would never reach iCloud and
-would leave the local store disagreeing with the server.
+would leave the local store disagreeing with the server — the deletion has to go
+through Messages for other devices to hear about it.
 
 Full Disk Access is a broad permission, Accessibility lets an app drive other
 apps, and this is an unsigned binary from a stranger. Those facts together are
