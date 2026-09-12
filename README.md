@@ -46,6 +46,14 @@ This repository is for distribution only — downloads live under
     a trash rather than deleting anything live. The count in the menu item is
     the last look before it runs, and the item disables itself when the queue is
     empty.
+
+    Before deleting, it adds up the message counts Messages puts on each
+    conversation row and checks this Mac's database agrees. If they disagree by
+    more than a hundred messages it stops and deletes nothing — the two only
+    drift apart when the Mac's Messages sync is behind, and deleting against a
+    stale picture is worth refusing.
+
+    The queue also empties itself when the count arrives at exactly 100.
   - Open Messages, and Quit.
 
 ## Install
